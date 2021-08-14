@@ -1,7 +1,6 @@
 module Datatypes
 
-import Generics.Derive
-%language ElabReflection
+import Data.Vect
 
 VarDefinition : Type
 VarDefinition = (String, String)
@@ -9,11 +8,13 @@ VarDefinition = (String, String)
 CaseMatchPattern : Type
 CaseMatchPattern = (String, String)
 
+public export
 data Lit =
   Boolean Bool
 
+public export
 data Expr =
-  Call Expr Expr
+  Call Expr
 | Case String Expr
 | FieldAccess Expr String
 | FuncDef String Expr
@@ -33,7 +34,10 @@ data ExpressionToken =
   | RParen
   | Whitespace
 
-%runElab derive "ExpressionToken" [Generic, Eq]
+-- export
+-- Eq ExpressionToken where
+--   (Word s) == (Word s) = s == s
+--   LParen == LParen
 
 export
 Show ExpressionToken where
