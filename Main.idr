@@ -1,6 +1,7 @@
 module Main
 
 import Datatypes
+import Lexer
 import Parser
 import Text.Parser.Core
 import Text.Parser

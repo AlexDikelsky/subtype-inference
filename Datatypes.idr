@@ -1,5 +1,4 @@
 module Datatypes
-
 import Data.Vect
 
 VarDefinition : Type
@@ -14,7 +13,7 @@ data Lit =
 
 public export
 data Expr =
-  Call Expr
+  Call Expr (List Expr)
 | Case String Expr
 | FieldAccess Expr String
 | FuncDef String Expr
@@ -34,10 +33,14 @@ data ExpressionToken =
   | RParen
   | Whitespace
 
--- export
--- Eq ExpressionToken where
---   (Word s) == (Word s) = s == s
---   LParen == LParen
+export
+Eq ExpressionToken where
+  (Word s) == (Word t) = s == t
+  LParen == LParen = True
+  RParen == RParen = True
+  Whitespace == Whitespace = True
+  _ == _ = False
+
 
 export
 Show ExpressionToken where
